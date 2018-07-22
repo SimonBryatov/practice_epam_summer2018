@@ -1,14 +1,23 @@
 .BookItem {
-    border: 2px solid grey;
+    width: 45%;
+    margin-top: 1em;
+    border: 4px dotted rgb(0, 0, 0);
+    background-color: rgb(228, 228, 228);
+    border-radius: 20px;
+    /* border-top: none; */
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding: 20px;
+    padding: 1em;
+}
+.BookItem:first-child {
+    /* border: 3px solid grey; */
 }
 
 .BookItem-booklogo {
-    border: 4px solid black;
-    width: 25%;
-    height: 25%;
+    /* border: 4px solid black; */
+    width: 8em;
+    /* height: ; */
 }
 
 .BookItem-description {
@@ -19,18 +28,21 @@
 }
 
 .BookItem-field__name {
-
+    font-size: 1.5em;
+    margin-bottom: 0.2em;
 }
 
 .BookItem-field__author {
-
+    font-size: 1.1em;
+    margin-bottom: 0;
 }
 
 .BookItem-field__year {
-
+    font-size: 1em;
 }
 
 .BookItem-controls {
+    height: 12em;
     flex-basis: 20%;
     display: flex;
     flex-direction: column;

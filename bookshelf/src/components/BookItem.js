@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../styles/BookItem.css';
+import { connect } from "react-redux"
 
-class BookItem extends Component {
-
-
-    render() {
-        return(
+let BookItem = ({dispatch}) => (
             <div className="BookItem">
             <img className="BookItem-booklogo" src="http://www.apogeonline.com/2001/libri/88-7303-790-9/8873037909p400.gif" alt="1"/>
             <div className="BookItem-description">
@@ -14,12 +11,10 @@ class BookItem extends Component {
             <p className="BookItem-field__year">2015</p>
             </div>
             <div className="BookItem-controls">
-            <button className="BookItem-btn">Edit</button>
+            <button className="BookItem-btn" onClick={() => {}}>Edit</button>
             <button className="BookItem-btn">Delete</button>
             </div>
             </div>
         )
-    }
-}
 
 export default BookItem;

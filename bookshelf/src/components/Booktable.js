@@ -8,7 +8,7 @@ class BookTable extends Component {
     renderContent() {
         let items = [];
         for (let i = 0; i < 5; i++) {
-            items.push(<BookItem />)
+            items.push(<BookItem key={i}/>)
         }
         return items
     }
