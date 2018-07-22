@@ -11,7 +11,7 @@ class App extends Component {
       <div className="App">
         <Modal shown={1}/>
         <div className="App-header">
-          <h1 className="App-title">Bookshelf</h1>
+          <div className="App-title">Bookshelf</div>
           <button className="App-button-add" onClick={() => {this.props.dispatch(toggleModal())}}>Add new book</button>
         </div>
         <BookTable />

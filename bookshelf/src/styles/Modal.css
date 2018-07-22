@@ -54,6 +54,7 @@
 
 .Modal-formfield__container {
     margin-bottom: 2em;
+    width: 100%;
 }
 
 .Modal-formfield__container div {
@@ -62,7 +63,7 @@
 
 .Modal-formfield__container input {
     font-size: 1.3em;
-    width: 30em;
+    width: 100%;
 }
 
 .Modal-controls button {

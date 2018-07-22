@@ -1,23 +1,27 @@
 import React, { Component } from 'react';
 import '../styles/Booktable.css';
+import { connect } from 'react-redux'
 
 import BookItem from "./BookItem"
 
-class BookTable extends Component {
+let BookTable = ({books}) => {
 
-    renderContent() {
+     let renderContent = () => {
         let items = [];
-        for (let i = 0; i < 5; i++) {
-            items.push(<BookItem key={i}/>)
+        for (let i = 0; i < books.length; i++) {
+            items.push(<BookItem key={i} info={books[i]}/>)
         }
         return items
     }
-
-    render() {
         return(
-            <div className="BookTable">{this.renderContent()}</div>
+            <div className="BookTable">{renderContent()}</div>
         )
     }
-}
+
+    const mapSTP = (state) => ({
+        books: state.items
+    })
+
+BookTable = connect(mapSTP)(BookTable)
 
 export default BookTable;
