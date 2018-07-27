@@ -1,20 +1,27 @@
 import React from 'react';
 import '../styles/Modal.css';
 import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
 import ModalForm from "./ModalForm"
+import ModalAgreement from "./ModalAgreement"
 
-import { toggleModal, saveBook } from "../redux/rootReducer"
+import { toggleModal, saveBook, deleteBook } from "../redux/rootReducer"
 
-let Modal = ({dispatch, opened}) => {
+let Modal = ({toggleModal, deleteBook, saveBook, opened, mode, itemId, selectedItem}) => {
     let submit = (values) => {
-        console.log(values);
-        dispatch(saveBook({...values}))
-    }    
+        saveBook(values);
+    } 
+    let deleteItem = () => {
+        toggleModal();
+        deleteBook(itemId);
+    }  
     return(
             opened ?
             <div className="Modal">
-            <ModalForm dispatch={dispatch} onSubmit={submit}/>
+            {mode === "edit" ?
+            <ModalForm toggleModal={toggleModal} onSubmit={submit}/>
+            :
+            <ModalAgreement onDelete={deleteItem} toggleModal={toggleModal} name={selectedItem.name}/>
+            }
             </div>
             : null
         )
@@ -27,9 +34,16 @@ let getCurrentItem = (state) => {
 
 const mapStateToProps = (state) => ({
     opened: state.logic.modal.opened,
+    mode: state.logic.modal.mode,
+    itemId: state.logic.itemIndex,
     selectedItem: getCurrentItem(state)
   })
+const mapDispatchToProps = (dispatch) => ({
+    toggleModal: () => dispatch(toggleModal()),
+    saveBook: (values) => dispatch(saveBook(values)),
+    deleteBook: (id) => dispatch(deleteBook(id))
+})  
 
-Modal = connect(mapStateToProps)(Modal)
+Modal = connect(mapStateToProps, mapDispatchToProps)(Modal)
 
 export default Modal

@@ -3,23 +3,18 @@ import { combineReducers } from "redux"
 import { reducer as formReducer } from 'redux-form'
 
 let initialState = {}
-// let rootReducer = (state = initialState, actions) => {
-//     return state
-// }
 
 const {toggleModal, saveBook, deleteBook} = createActions({
-    TOGGLE_MODAL: (itemIndex) => (itemIndex),
+    TOGGLE_MODAL: (itemIndex, mode="edit") => ({itemIndex, mode}),
     SAVE_BOOK: (data) => (data),
     DELETE_BOOK: (id) => (id)
   });  
 
-//console.log(toggleModal())
-
   const logicReducer = handleActions(
     {
-      [toggleModal]: (state, {payload}) => {
-        if (payload === undefined) payload = "";
-        return { ...state, modal: {...state.modal, opened: !state.modal.opened}, itemIndex: payload};
+      [toggleModal]: (state, {payload: {itemIndex, mode}}) => {
+        if (itemIndex === undefined) itemIndex = "";
+        return { ...state, modal: {...state.modal, opened: !state.modal.opened, mode}, itemIndex: itemIndex};
       },
       [saveBook]: (state, {payload}) => {
         let items = [...state.items]

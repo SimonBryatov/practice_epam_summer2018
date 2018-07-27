@@ -1,9 +1,8 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from "react-redux"
-import { toggleModal, saveBook } from "../redux/rootReducer"
 
-let ModalForm = ({handleSubmit, dispatch, reset}) => {
+let ModalForm = ({handleSubmit, toggleModal, reset}) => {
   return <form onSubmit={handleSubmit} className="Modal-content">
   <p className="Modal-header">Book editor</p>
   <div className="Modal-formfield__container">
@@ -23,8 +22,8 @@ let ModalForm = ({handleSubmit, dispatch, reset}) => {
   <Field name="imageUrl" component="input" type="text" />
   </div>
   <div className="Modal-controls">
-  <button className="Modal-btn--save" type="submit" onClick={() => {}}>Save</button>
-  <button className="Modal-btn--cancel" onClick={() => {dispatch(toggleModal()); reset()}}>Cancel</button>
+  <button className="Modal-btn--save" type="submit">Save</button>
+  <button className="Modal-btn--cancel" onClick={() => {toggleModal(); reset()}}>Cancel</button>
   </div>
   </form>
 }

@@ -9,7 +9,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Modal shown={1}/>
+        <Modal />
         <div className="App-header">
           <div className="App-title">Bookshelf</div>
           <button className="App-button-add" onClick={() => {this.props.dispatch(toggleModal())}}>Add new book</button>
