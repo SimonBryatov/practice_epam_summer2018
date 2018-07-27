@@ -1,25 +1,28 @@
 import { createActions, handleActions, combineActions } from "redux-actions";
+import { combineReducers } from "redux"
+import { reducer as formReducer } from 'redux-form'
 
 let initialState = {
   modal: 
-  {opened: true, name: "", author: "", year: "", imageUrl: ""},
-  items: [{name: "Why", author: "Me", year: "22", imageUrl: "..."}]
+  {opened: false, name: "", author: "", year: "", imageUrl: ""},
+  items: [{name: "Why", author: "Me", year: "22", imageUrl: "..."}],
+  itemIndex: ""
 }
 // let rootReducer = (state = initialState, actions) => {
 //     return state
 // }
 
 const {toggleModal, addBook} = createActions({
-    TOGGLE_MODAL: (name = "", author="", year = "", imageUrl = "") => ({name, author, year, imageUrl}),
+    TOGGLE_MODAL: (itemIndex) => (itemIndex),
     ADD_BOOK: (info) => (info)
   });  
 
 //console.log(toggleModal())
 
-  const rootReducer = handleActions(
+  const logicReducer = handleActions(
     {
       [toggleModal]: (state, {payload}) => {
-        return { ...state, modal: {...state.modal, opened: !state.modal.opened, ...payload}};
+        return { ...state, modal: {...state.modal, opened: !state.modal.opened}, ...payload};
       },
       [addBook]: (state, {payload}) => {
         let items = [...state.items]
@@ -29,6 +32,11 @@ const {toggleModal, addBook} = createActions({
     },
     initialState
   );
+
+  const rootReducer = combineReducers({
+   logic: logicReducer,
+   form: formReducer
+  })  
 
 export {toggleModal, addBook};
 export default rootReducer

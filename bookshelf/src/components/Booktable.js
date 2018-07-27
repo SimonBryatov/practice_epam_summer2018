@@ -19,7 +19,7 @@ let BookTable = ({books}) => {
     }
 
     const mapSTP = (state) => ({
-        books: state.items
+        books: state.logic.items
     })
 
 BookTable = connect(mapSTP)(BookTable)

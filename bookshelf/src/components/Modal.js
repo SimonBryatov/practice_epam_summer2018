@@ -1,44 +1,35 @@
 import React, { Component } from 'react';
 import '../styles/Modal.css';
 import { connect } from 'react-redux'
+import { Field, reduxForm } from 'redux-form'
+import ModalForm from "./ModalForm"
+
 import {toggleModal, addBook} from "../redux/rootReducer"
 
-let Modal = ({dispatch, modalState}) => {
-        return(
-            modalState.opened ?
+let Modal = ({dispatch, opened}) => {
+    let submit = (values) => {
+        console.log(values);
+        dispatch(toggleModal())
+    }    
+    return(
+            opened ?
             <div className="Modal">
-            <div className="Modal-content">
-            <p className="Modal-header">Book editor</p>
-            <div className="Modal-formfield__container">
-            <div>Name</div>
-            <input value={modalState.name}/>
-            </div>
-            <div className="Modal-formfield__container">
-            <div>Author</div>
-            <input value={modalState.author}/>
-            </div>
-            <div className="Modal-formfield__container"> 
-            <div>Year</div>
-            <input value={modalState.year}/>
-            </div>
-            <div className="Modal-formfield__container">
-            <div>Image link</div>
-            <input value={modalState.imageUrl}/>
-            </div>
-            <div className="Modal-controls">
-            <button className="Modal-btn--save" onClick={() => {dispatch(toggleModal()); dispatch(addBook())}}>Save</button>
-            <button className="Modal-btn--cancel" onClick={() => dispatch(toggleModal())}>Cancel</button>
-            </div>
-            </div>
+            <ModalForm dispatch={dispatch} onSubmit={submit}/>
             </div>
             : null
         )
 }
 
+let getCurrentItem = (state) => {
+    let index = state.logic.itemIndex
+    return index == "" ? null : state.items[index] 
+}
+
 const mapStateToProps = (state) => ({
-    modalState: state.modal
+    opened: state.logic.modal.opened,
+    selectedItem: getCurrentItem(state)
   })
-  
+
 Modal = connect(mapStateToProps)(Modal)
 
 export default Modal
