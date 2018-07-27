@@ -1,20 +1,16 @@
-import { createActions, handleActions, combineActions } from "redux-actions";
+import { createActions, handleActions} from "redux-actions";
 import { combineReducers } from "redux"
 import { reducer as formReducer } from 'redux-form'
 
-let initialState = {
-  modal: 
-  {opened: false, name: "", author: "", year: "", imageUrl: ""},
-  items: [{name: "Why", author: "Me", year: "22", imageUrl: "..."}],
-  itemIndex: ""
-}
+let initialState = {}
 // let rootReducer = (state = initialState, actions) => {
 //     return state
 // }
 
-const {toggleModal, addBook} = createActions({
+const {toggleModal, saveBook, deleteBook} = createActions({
     TOGGLE_MODAL: (itemIndex) => (itemIndex),
-    ADD_BOOK: (info) => (info)
+    SAVE_BOOK: (data) => (data),
+    DELETE_BOOK: (id) => (id)
   });  
 
 //console.log(toggleModal())
@@ -22,12 +18,22 @@ const {toggleModal, addBook} = createActions({
   const logicReducer = handleActions(
     {
       [toggleModal]: (state, {payload}) => {
-        return { ...state, modal: {...state.modal, opened: !state.modal.opened}, ...payload};
+        if (payload === undefined) payload = "";
+        return { ...state, modal: {...state.modal, opened: !state.modal.opened}, itemIndex: payload};
       },
-      [addBook]: (state, {payload}) => {
+      [saveBook]: (state, {payload}) => {
         let items = [...state.items]
-        items.push(payload)
-        return { ...state, items};
+        if (state.itemIndex === "") {
+        items.push({...payload})
+        } else {
+          items[state.itemIndex] = {...payload}
+        }
+        return { ...state, items, modal: {opened: false}};
+      },
+      [deleteBook]: (state, {payload}) => {
+        let items = [...state.items]
+        items.splice(payload, 1);
+        return {...state, items}
       }
     },
     initialState
@@ -38,5 +44,5 @@ const {toggleModal, addBook} = createActions({
    form: formReducer
   })  
 
-export {toggleModal, addBook};
+export {toggleModal, saveBook, deleteBook};
 export default rootReducer

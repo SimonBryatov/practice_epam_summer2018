@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from "react-redux"
-import {toggleModal, addBook} from "../redux/rootReducer"
+import { toggleModal, saveBook } from "../redux/rootReducer"
 
 let ModalForm = ({handleSubmit, dispatch, reset}) => {
   return <form onSubmit={handleSubmit} className="Modal-content">
@@ -23,19 +23,29 @@ let ModalForm = ({handleSubmit, dispatch, reset}) => {
   <Field name="imageUrl" component="input" type="text" />
   </div>
   <div className="Modal-controls">
-  <button className="Modal-btn--save" type="submit">Save</button>
+  <button className="Modal-btn--save" type="submit" onClick={() => {}}>Save</button>
   <button className="Modal-btn--cancel" onClick={() => {dispatch(toggleModal()); reset()}}>Cancel</button>
   </div>
   </form>
 }
 
 ModalForm = reduxForm({
-  form: 'bookSettings'
+  form: 'bookSettings',
+  enableReinitialize: true,
+ // keepDirtyOnReinitialize: true
 })(ModalForm)
 
-ModalForm = connect((state) => ({
-    initialValues: {name: "wow"}
-}))(ModalForm)
+let mstp = (state) => {
+  let index = state.logic.itemIndex  
+  //console.log(state)
+  if (index !== "") {
+    let item = state.logic.items[index]
+    console.log({...item})
+    return {initialValues: {...item}}
+  } else return {}
+}
+
+ModalForm = connect(mstp)(ModalForm)
 
 
 export default ModalForm

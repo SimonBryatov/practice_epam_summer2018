@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../styles/Booktable.css';
 import { connect } from 'react-redux'
 
@@ -9,7 +9,7 @@ let BookTable = ({books}) => {
      let renderContent = () => {
         let items = [];
         for (let i = 0; i < books.length; i++) {
-            items.push(<BookItem key={i} info={books[i]}/>)
+            items.push(<BookItem key={i} id={i} info={books[i]}/>)
         }
         return items
     }

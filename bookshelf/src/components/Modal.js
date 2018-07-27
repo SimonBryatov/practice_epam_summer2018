@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../styles/Modal.css';
 import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import ModalForm from "./ModalForm"
 
-import {toggleModal, addBook} from "../redux/rootReducer"
+import { toggleModal, saveBook } from "../redux/rootReducer"
 
 let Modal = ({dispatch, opened}) => {
     let submit = (values) => {
         console.log(values);
-        dispatch(toggleModal())
+        dispatch(saveBook({...values}))
     }    
     return(
             opened ?
@@ -22,7 +22,7 @@ let Modal = ({dispatch, opened}) => {
 
 let getCurrentItem = (state) => {
     let index = state.logic.itemIndex
-    return index == "" ? null : state.items[index] 
+    return index === "" ? "" : state.logic.items[index] 
 }
 
 const mapStateToProps = (state) => ({
