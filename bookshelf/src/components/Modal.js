@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/Modal.css';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux'
 import ModalForm from "./ModalForm"
 import ModalAgreement from "./ModalAgreement"
@@ -15,15 +16,20 @@ let Modal = ({toggleModal, deleteBook, saveBook, opened, mode, itemId, selectedI
         deleteBook(itemId);
     }  
     return(
-            opened ?
-            <div className="Modal">
+        <ReactCSSTransitionGroup
+            transitionName="modal-show"
+            transitionEnterTimeout={200}
+            transitionLeaveTimeout={200}>
+            {opened ? 
+            <div key="1" className="Modal">
             {mode === "edit" ?
             <ModalForm toggleModal={toggleModal} onSubmit={submit}/>
             :
             <ModalAgreement onDelete={deleteItem} toggleModal={toggleModal} name={selectedItem.name}/>
             }
             </div>
-            : null
+            : null}
+            </ReactCSSTransitionGroup>
         )
 }
 
