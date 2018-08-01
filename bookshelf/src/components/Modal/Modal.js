@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Modal.css';
+import './Modal.css';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux'
 import ModalForm from "./ModalForm"

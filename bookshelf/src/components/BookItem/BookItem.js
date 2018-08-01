@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/BookItem.css';
+import './BookItem.css';
 import { connect } from "react-redux"
 import {toggleModal} from "../redux/rootReducer"
 

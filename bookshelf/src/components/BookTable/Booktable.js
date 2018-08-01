@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Booktable.css';
+import './Booktable.css';
 import { connect } from 'react-redux'
 
 import BookItem from "./BookItem"

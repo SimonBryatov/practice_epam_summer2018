@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/Modal.css';
 
 let ModalAgreement = ({name, toggleModal, onDelete}) => (
     <div className="Modal-content">

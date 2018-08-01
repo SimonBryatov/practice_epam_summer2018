@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BookTable from "./Booktable"
 import Modal from "./Modal"
-import '../styles/App.css';
+import './App.css';
 import { connect } from 'react-redux'
 import {toggleModal} from "../redux/rootReducer"
 
