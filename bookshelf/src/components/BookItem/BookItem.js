@@ -1,7 +1,7 @@
 import React from 'react';
 import './BookItem.css';
 import { connect } from "react-redux"
-import {toggleModal} from "../redux/rootReducer"
+import {toggleModal} from "../../redux/actions/logicActions"
 
 let imgThunk = "../styles/noImage.png"
 

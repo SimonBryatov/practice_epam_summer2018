@@ -1,5 +1,5 @@
 .BookItem {
-    width: 45%;
+    width: 43%;
     margin-top: 1em;
     border: 4px dotted rgb(0, 0, 0);
     background-color: rgb(228, 228, 228);
@@ -15,7 +15,7 @@
 }
 
 .BookItem-description {
-    flex-basis: 40%;
+    flex-basis: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -1,27 +1,16 @@
 import React from 'react';
-import './Booktable.css';
-import { connect } from 'react-redux'
+import './BookTable.css';
 
-import BookItem from "./BookItem"
+import BookItem from "../BookItem/BookItem"
 
 let BookTable = ({books}) => {
 
-     let renderContent = () => {
-        let items = [];
-        for (let i = 0; i < books.length; i++) {
-            items.push(<BookItem key={i} id={i} info={books[i]}/>)
-        }
-        return items
-    }
+     let renderBooks = () => (
+        books.map((book, ind) => <BookItem key={ind} id={ind} info={book}/>)
+     )
         return(
-            <div className="BookTable">{renderContent()}</div>
+            <div className="BookTable">{renderBooks()}</div>
         )
     }
-
-    const mapSTP = (state) => ({
-        books: state.logic.items
-    })
-
-BookTable = connect(mapSTP)(BookTable)
 
 export default BookTable;

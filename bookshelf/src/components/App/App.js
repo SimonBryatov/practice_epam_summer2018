@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import BookTable from "./Booktable"
-import Modal from "./Modal"
+import BookTableContainer from "../../containers/BookTableContainer"
+import ModalContainer from "../../containers/ModalContainer"
 import './App.css';
 import { connect } from 'react-redux'
-import {toggleModal} from "../redux/rootReducer"
+import {toggleModal} from "../../redux/actions/logicActions"
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Modal />
+        <ModalContainer />
         <div className="App-header">
           <div className="App-title">Bookshelf</div>
           <button className="App-button-add" onClick={() => {this.props.dispatch(toggleModal())}}>Add new book</button>
         </div>
-        <BookTable />
+        <BookTableContainer />
       </div>
     );
   }

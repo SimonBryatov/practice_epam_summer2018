@@ -1,6 +1,5 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { connect } from "react-redux"
 
 let ModalForm = ({handleSubmit, toggleModal, reset}) => {
   return <form onSubmit={handleSubmit} className="Modal-content">
@@ -32,16 +31,5 @@ ModalForm = reduxForm({
   form: 'bookSettings',
   enableReinitialize: true,
 })(ModalForm)
-
-let mstp = (state) => {
-  let index = state.logic.itemIndex  
-  if (index !== "") {
-    let item = state.logic.items[index]
-    return {initialValues: {...item}}
-  } else return {}
-}
-
-ModalForm = connect(mstp)(ModalForm)
-
 
 export default ModalForm
